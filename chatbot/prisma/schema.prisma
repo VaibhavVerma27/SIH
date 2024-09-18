@@ -20,6 +20,36 @@ model Profile{
   imageUrl String @db.Text
   email String @db.Text
 
+  ticketsAdded Tickets[] @relation("Owner")
+  ticketsPurchased Tickets[] @relation("Buyer")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+
+enum TicketType{
+  CHILD
+  ADULT
+  FOREIGNER
+}
+model Tickets{
+  id String @id @default(uuid())
+
+  type TicketType @default(ADULT)
+
+  name String
+  amount Int
+
+  addedById String
+  addedBy Profile @relation("Owner",fields: [addedById],references: [id],onDelete: Cascade)
+
+  purchasedById String
+  purchasedBy Profile @relation("Buyer",fields: [purchasedById],references: [id],onDelete: Cascade)
+
+  @@index([addedById])
+  @@index([purchasedById])
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
