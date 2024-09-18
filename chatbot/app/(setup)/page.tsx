@@ -1,4 +1,3 @@
-import { db } from "@/lib/db";
 import { initialProfile } from "@/lib/initial-profile";
 
 import Home from "../page";
