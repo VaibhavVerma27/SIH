@@ -20,6 +20,7 @@ model Profile{
   imageUrl String @db.Text
   email String @db.Text
 
+  ticketsAdded Tickets[] @relation("Owner")
   ticketsPurchased Tickets[] @relation("Buyer")
 
   createdAt DateTime @default(now())
@@ -39,6 +40,8 @@ model Tickets{
 
   name String
   amount Int
+
+  ticketAvailable Int
 
   addedById String
   addedBy Admin @relation("Owner",fields: [addedById],references: [email],onDelete: Cascade)
