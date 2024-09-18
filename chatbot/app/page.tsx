@@ -1,6 +1,8 @@
+import { initialProfile } from "@/lib/initial-profile"
 
-export default function Home() {
+export default async function Home() {
+  const profile = await initialProfile();
   return (
-    <div></div>
+    <div>{profile.name}</div>
   );
 }
