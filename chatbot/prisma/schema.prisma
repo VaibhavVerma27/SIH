@@ -41,6 +41,8 @@ model Tickets{
   name String
   amount Int
 
+  ticketAvailable Int 
+
   addedById String
   addedBy Profile @relation("Owner",fields: [addedById],references: [id],onDelete: Cascade)
 
