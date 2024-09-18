@@ -20,7 +20,6 @@ model Profile{
   imageUrl String @db.Text
   email String @db.Text
 
-  ticketsAdded Tickets[] @relation("Owner")
   ticketsPurchased Tickets[] @relation("Buyer")
 
   createdAt DateTime @default(now())
@@ -42,7 +41,7 @@ model Tickets{
   amount Int
 
   addedById String
-  addedBy Profile @relation("Owner",fields: [addedById],references: [id],onDelete: Cascade)
+  addedBy Admin @relation("Owner",fields: [addedById],references: [email],onDelete: Cascade)
 
   purchasedById String
   purchasedBy Profile @relation("Buyer",fields: [purchasedById],references: [id],onDelete: Cascade)
@@ -52,4 +51,12 @@ model Tickets{
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Admin{
+  name String
+  email String @unique
+  password String
+
+  ticketsAdded Tickets[] @relation("Owner")
 }
