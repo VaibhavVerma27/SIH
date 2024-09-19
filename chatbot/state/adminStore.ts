@@ -7,16 +7,19 @@ interface Admin {
 }
 
 interface AdminStore {
-  user: Admin | null;
+  user: Admin;
   isAdmin: boolean;
   setAdmin: (adminInfo: Admin) => void;
   signOut: () => void;
 }
 
 export const useAdminStore = create<AdminStore>((set) => ({
-      user: null,
+      user: {
+        name: "",
+        email: "",
+      },
       isAdmin: true,
       setAdmin: (adminInfo) => set({ user: adminInfo, isAdmin: true }),
-      signOut: () => {set({ user: null, isAdmin: false });},
+      signOut: () => {set({ user: {name: "", email: "",}, isAdmin: false });},
 }));
 
