@@ -1,15 +1,12 @@
-"use client"
-import { useAdminStore } from "@/state/adminStore";
-import { useUserStore } from "@/state/userStore";
-import {redirect} from "next/navigation";
+import Bot from "@/components/bot/bot";
+
+import { initialProfile } from "@/lib/initial-profile";
 
 export default async function Home() {
-  const { isAdmin } = useAdminStore.getState();
-  const { isUser } = useUserStore.getState();
 
-  if (isAdmin) {
-    redirect("/admin-home");
-  } else if (isUser) {
+  const intialProfile = await initialProfile();
 
-  } else redirect("/sign-in")
+  return(
+    <Bot/>
+  );
 }
